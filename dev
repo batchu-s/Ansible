@@ -6,3 +6,6 @@ node
 
 [control]
 localhost ansible_connection=local
+
+[dbserver]
+node
