@@ -1,0 +1,5 @@
+[loadbalancer]
+node
+
+[control]
+localhost ansible_connection=local
