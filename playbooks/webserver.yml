@@ -12,3 +12,9 @@
           - python-pip
           - python-virtualenv
 
+      - name: ensure httpd started
+        service:
+          name: httpd
+          state: started
+          enabled: yes
+

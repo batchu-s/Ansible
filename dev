@@ -2,7 +2,7 @@
 node
 
 [webserver]
-node
+svr1
 
 [control]
 localhost ansible_connection=local
