@@ -9,7 +9,6 @@
           update_cache: yes
         with_items:
           - httpd
-          - libapache2-mod-wsgi
           - python-pip
           - python-virtualenv
 
