@@ -45,6 +45,19 @@
           virtualenv: /var/www/demo/.venv
         notify: restart httpd
 
+      - name: de-activate default apache-site
+        file:
+          path: /etc/httpd/conf/httpd.conf
+          state: absent
+        notify: restart httpd
+
+      - name: activate our python site
+        file:
+          src: /etc/httpd/sites-available
+          dest: /etc/httpd/conf/httpd.conf
+          state: link
+        notify: restart httpd
+
     handlers:
       - name: restart httpd
         service:
