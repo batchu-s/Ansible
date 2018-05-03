@@ -19,6 +19,11 @@
           state: started
           enabled: yes
 
+      - name: ensure mod_wsgi enabled
+        apache2_module:
+          state: present
+          name: wsgi_module
+
       - name: copy app demo files
         copy:
           src: /etc/ansible/demo/app/
