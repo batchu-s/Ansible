@@ -10,8 +10,8 @@
         with_items:
           - httpd
           - mod_wsgi
-          - python-pip
-          - python-virtualenv
+          - python36-pip
+          - python36-virtualenv
 
       - name: ensure httpd started
         service:
