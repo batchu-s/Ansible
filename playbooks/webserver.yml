@@ -27,14 +27,14 @@
 
       - name: copy app demo files
         copy:
-          src: demo/app/
+          src: /etc/ansible/demo/app/
           dest: /var/www/demo
           mode: 0755
         notify: restart httpd
 
       - name: copy apache virtual host config
         copy:
-          src: demo/demo.conf
+          src: /etc/ansible/demo/demo.conf
           dest: /etc/httpd/sites-available
           mode: 0755
         notify: restart httpd
