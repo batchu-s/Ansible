@@ -35,7 +35,7 @@
       - name: copy apache virtual host config
         copy:
           src: /etc/ansible/demo/demo.conf
-          dest: /etc/httpd/sites-available/
+          dest: /etc/httpd/sites-available
           mode: 0755
         notify: restart httpd
 
