@@ -1,0 +1,44 @@
+---
+  # Bringing stack down
+  - hosts: loadbalancer
+    become: true
+    tasks:
+      - name: stop loadbalancers
+        service:
+          name: nginx
+          state: stopped
+
+  - hosts: webserver
+    become: true
+    tasks:
+      - name: stopping httpd
+        service:
+          name: httpd
+          state: stopped
+
+  # Restarting Database server
+  - hosts: dbserver
+    become: true
+    tasks:
+      - name: restarting mysql-server
+        service: 
+          name: mysqld
+          state: restarted
+
+  # Bringing stack up
+  - hosts: webserver
+    become: true
+    tasks:
+      - name: starting httpd
+        service:
+          name: httpd
+          state: started
+
+  - hosts: loadbalancer
+    become: true
+    tasks:
+      - name: starting loadbalancers
+        service:
+          name: nginx
+          state: started
+
