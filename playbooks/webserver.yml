@@ -21,7 +21,7 @@
 
       - name: ensure mod_wsgi enabled
         apache2_module:
-          name: mod_wsgi
+          name: wsgi_module
           state: present
         notify: restart httpd
 
