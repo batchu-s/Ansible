@@ -25,9 +25,22 @@
           state: present
         notify: restart httpd
 
+      - name: copy app demo files
+        copy:
+          src: demo/app/
+          dest: /var/www/demo
+          mode: 0755
+        notify: restart httpd
+
+      - name: copy apache virtual host config
+        copy:
+          src: demo/demo.conf
+          dest: /etc/httpd/sites-available
+          mode: 0755
+        notify: restart httpd
+
     handlers:
       - name: restart httpd
         service:
           name: httpd
           state: restarted
-
