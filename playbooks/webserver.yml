@@ -9,7 +9,7 @@
     tasks:
       - name: install web components
         apt:
-          name: {{item}}
+          name: "{{item}}"
           state: latest
           update_cache: yes
           with_items:
