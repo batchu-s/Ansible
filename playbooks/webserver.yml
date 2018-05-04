@@ -3,57 +3,12 @@
     become: true
     tasks:
       - name: install web components
-        yum:
+        apt:
           name: "{{item}}"
           state: latest
           update_cache: yes
-        with_items:
-          - httpd
-          - mod_wsgi
-          - python36-pip
-          - python36-virtualenv
-
-      - name: ensure httpd started
-        service:
-          name: httpd
-          state: started
-          enabled: yes
-
-      - name: copy app demo files
-        copy:
-          src: /etc/ansible/demo/app/
-          dest: /var/www/demo
-          mode: 0755
-        notify: restart httpd
-
-      - name: copy apache virtual host config
-        copy:
-          src: /etc/ansible/demo/demo.conf
-          dest: /etc/httpd/sites-available
-          mode: 0755
-        notify: restart httpd
-
-      - name: setup python virtualenv
-        pip:
-          requirements: /var/www/demo/requirements
-          virtualenv: /var/www/demo/.venv
-        notify: restart httpd
-
-      - name: de-activate default apache-site
-        file:
-          path: /etc/httpd/conf/httpd.conf
-          state: absent
-        notify: restart httpd
-
-      - name: activate our python site
-        file:
-          src: /etc/httpd/sites-available
-          dest: /etc/httpd/conf/httpd.conf
-          state: link
-        notify: restart httpd
-
-    handlers:
-      - name: restart httpd
-        service:
-          name: httpd
-          state: restarted
+          with_items:
+            - apache2
+            - libapache2-mod-wsgi
+            - python-pip
+            - python-virtualenv
