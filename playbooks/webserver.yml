@@ -12,3 +12,4 @@
             - libapache2-mod-wsgi
             - python-pip
             - python-virtualenv
+            - python3
