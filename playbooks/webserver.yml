@@ -24,7 +24,7 @@
 
       - name: copy demo app to webserver
         copy:
-          src: /etc/anssible/demo/app/
+          src: /etc/ansible/demo/app/
           dest: /var/www/demo
           mode: 0755
         notify: restart apache2
