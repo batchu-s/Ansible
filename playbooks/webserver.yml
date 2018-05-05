@@ -36,6 +36,12 @@
           mode: 0755
         notify: restart apache2
 
+      - name: setup python virtualenv
+        pip:
+          requirements: /var/www/demo/requirements
+          virtualenv: /var/www/demo/.venv
+        notify: restart apache2
+
     handlers:
       - name: restart apache2
         service:
