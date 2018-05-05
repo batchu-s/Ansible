@@ -22,6 +22,13 @@
           name: wsgi
         notify: restart apache2
 
+      - name: copy demo app to webserver
+        copy:
+          src: /etc/anssible/demo/app/
+          dest: /var/www/demo
+          mode: 0755
+        notify: restart apache2
+
     handlers:
       - name: restart apache2
         service:
