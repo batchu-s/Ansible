@@ -1,0 +1,15 @@
+http{
+  upstream demo{
+    {% for svr in groups.webserver %}
+      server {{ svr }};
+    {% endfor %}
+  }
+
+  server{
+    listen 80;
+
+    location / {
+      proxy_pass http://demo
+    }
+  }
+}
