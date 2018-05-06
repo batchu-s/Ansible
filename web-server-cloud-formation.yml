@@ -10,4 +10,4 @@ Resources:
         - sg-49f0e600
       Tags:
         - Key: name
-          Value: web-server
+          Value: load-balancer
