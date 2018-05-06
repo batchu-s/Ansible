@@ -1,42 +1,42 @@
 ---
   - hosts: loadbalancer
     become: true
-    #gather_facts: no
-    #pre_tasks:
-      #- name: install python
-      #  raw: sudo apt install -y python
-    tasks:
-      - name: install nginx
-        apt: name=nginx state=present update_cache=yes
-
-      - name: ensure nginx started
-        service:
-          name: nginx
-          state: started
-          enabled: yes
-
-      - name: configure nginx site
-        template:
-          src: ../templates/nginx.conf.j2
-          dest: /etc/nginx/sites-available/demo
-          mode: 0644
-        notify: restart nginx
-
-      - name: de-activate nginx default site
-        file:
-          path: /etc/nginx/sites-enabled/default
-          state: absent
-        notify: restart nginx
-
-      - name: activate our demo site
-        file:
-          src: /etc/nginx/sites-available/demo
-          dest: /etc/nginx/sites-enabled/demo
-          state: link
-        notify: restart nginx
-      
-    handlers:
-      - name: restart nginx
-        service:
-          name: nginx
-          state: restarted
+    gather_facts: no
+    pre_tasks:
+      - name: install python
+        raw: sudo apt install -y python
+    # tasks:
+    #   - name: install nginx
+    #     apt: name=nginx state=present update_cache=yes
+    #
+    #   - name: ensure nginx started
+    #     service:
+    #       name: nginx
+    #       state: started
+    #       enabled: yes
+    #
+    #   - name: configure nginx site
+    #     template:
+    #       src: ../templates/nginx.conf.j2
+    #       dest: /etc/nginx/sites-available/demo
+    #       mode: 0644
+    #     notify: restart nginx
+    #
+    #   - name: de-activate nginx default site
+    #     file:
+    #       path: /etc/nginx/sites-enabled/default
+    #       state: absent
+    #     notify: restart nginx
+    #
+    #   - name: activate our demo site
+    #     file:
+    #       src: /etc/nginx/sites-available/demo
+    #       dest: /etc/nginx/sites-enabled/demo
+    #       state: link
+    #     notify: restart nginx
+    #
+    # handlers:
+    #   - name: restart nginx
+    #     service:
+    #       name: nginx
+    #       state: restarted
