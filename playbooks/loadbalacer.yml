@@ -1,10 +1,6 @@
 ---
   - hosts: loadbalancer
     become: true
-    # gather_facts: no
-    # pre_tasks:
-    #   - name: install python
-    #     raw: sudo apt install -y python
     tasks:
       - name: install nginx
         apt: name=nginx state=present update_cache=yes
@@ -22,16 +18,16 @@
           mode: 0644
         notify: restart nginx
 
-      - name: de-activate nginx default site
+      - name: de-activate default nginx site
         file:
           path: /etc/nginx/sites-enabled/default
           state: absent
         notify: restart nginx
 
-      - name: activate our demo site
+      - name: activate demo site
         file:
           src: /etc/nginx/sites-available/demo
-          dest: /etc/nginx/sites-enabled/demo
+          dest: /etc/nginx/sites-enabled/default
           state: link
         notify: restart nginx
 
@@ -40,3 +36,4 @@
         service:
           name: nginx
           state: restarted
+
