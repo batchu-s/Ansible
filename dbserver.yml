@@ -1,7 +1,6 @@
 ---
   - hosts: dbserver
     become: true
-    remote_user: root
     tasks:
       - name: install tools
         apt: name="{{item}}" state=present update_cache=yes
@@ -28,6 +27,7 @@
         mysql_db:
           name: demo
           state: present
+          user: sumanth
 
       - name: create demo user
         mysql_user:
