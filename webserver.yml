@@ -9,6 +9,7 @@
           - libapache2-mod-wsgi
           - python-pip
           - python-virtualenv
+          - python-mysqldb
 
       - name: ensure apache2 is enabled
         service:
