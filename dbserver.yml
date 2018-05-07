@@ -1,6 +1,7 @@
 ---
   - hosts: dbserver
-    become: true
+    #become: true
+    remote_user: root
     tasks:
       - name: install tools
         apt: name="{{item}}" state=present update_cache=yes
@@ -32,7 +33,7 @@
         mysql_user:
           name: demo
           password: demo
-          priv: 'demo.*:ALL'
+          priv: demo.*:ALL
           state: present
           host: '%'
 
