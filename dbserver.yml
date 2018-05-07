@@ -27,7 +27,6 @@
         mysql_db:
           name: demo
           state: present
-          user: sumanth
 
       - name: create demo user
         mysql_user:
