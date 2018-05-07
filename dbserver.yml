@@ -2,6 +2,11 @@
   - hosts: dbserver
     become: true
     tasks:
+      - name: install tools
+        apt: name="{{item}}" state=present update_cache=yes
+        with_items:
+          - python-mysqldb
+
       - name: install mysql-server
         apt: name=mysql-server state=present update_cache=yes
 
@@ -18,9 +23,21 @@
           line: 'bind-address = 0.0.0.0'
         notify: restart mysql
 
+      - name: create demo database
+        mysql_db:
+          name: demo
+          state: present
+
+      - name: create demo user
+        mysql_user:
+          name: demo
+          password: demo
+          priv: 'demo.*:ALL'
+          state: present
+          host: '%'
+
     handlers:
       - name: restart mysql
         service:
           name: mysql
           state: restarted
-
