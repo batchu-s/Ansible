@@ -14,30 +14,30 @@
         service:
           name: mysql
           state: started
-          enabled: yes
+          enabled: true
 
-      - name: ensure db is listening on all ports
+      - name: ensure db listening on all ports
         lineinfile:
-          path: /etc/mysql/my.cnf
-          regexp: ^bind-address
-          line: 'bind-address = 0.0.0.0'
+            path: /etc/mysql/mysql.conf.d/mysqld.cnf
+            regexp: ^bind-address
+            line: 'bind-address = 0.0.0.0'
         notify: restart mysql
 
-      - name: create demo database
+      - name: create demo db
         mysql_db:
           name: demo
           state: present
+          config_file: /etc/mysql/mysql.conf.d/mysqld.cnf
 
       - name: create demo user
         mysql_user:
           name: demo
           password: demo
-          priv: demo.*:ALL
           state: present
+          priv: demo.*:ALL
           host: '%'
 
     handlers:
       - name: restart mysql
-        service:
-          name: mysql
-          state: restarted
+        service: name=mysql state=restarted
+

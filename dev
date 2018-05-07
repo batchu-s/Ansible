@@ -1,12 +1,12 @@
 #This is inventory file
 [loadbalancer]
-node
+lb01
 
 [webserver]
-svr1
+svr01
 
 [control]
 localhost ansible_connection=local
 
 [dbserver]
-node
+db01
