@@ -1,43 +1,6 @@
 ---
   - hosts: dbserver
     become: true
-    tasks:
-      - name: install tools
-        apt: name="{{item}}" state=present update_cache=yes
-        with_items:
-          - python-mysqldb
-
-      - name: install mysql-server
-        apt: name=mysql-server state=present update_cache=yes
-
-      - name: ensure mysql service started
-        service:
-          name: mysql
-          state: started
-          enabled: true
-
-      - name: ensure db listening on all ports
-        lineinfile:
-            path: /etc/mysql/mysql.conf.d/mysqld.cnf
-            regexp: ^bind-address
-            line: 'bind-address = 0.0.0.0'
-        notify: restart mysql
-
-      - name: create demo db
-        mysql_db:
-          name: demo
-          state: present
-          config_file: /etc/mysql/mysql.conf.d/mysqld.cnf
-
-      - name: create demo user
-        mysql_user:
-          name: demo
-          password: demo
-          state: present
-          priv: demo.*:ALL
-          host: '%'
-
-    handlers:
-      - name: restart mysql
-        service: name=mysql state=restarted
-
+    roles:
+      - mysql
+      
