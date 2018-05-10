@@ -15,9 +15,9 @@
   - hosts: webserver
     become: true
     tasks:
-      - name: stopping httpd
+      - name: stopping apache2
         service:
-          name: httpd
+          name: apache2
           state: stopped
 
       - wait_for:
@@ -41,9 +41,9 @@
   - hosts: webserver
     become: true
     tasks:
-      - name: starting httpd
+      - name: starting apache2
         service:
-          name: httpd
+          name: apache2
           state: started
 
       - wait_for:
