@@ -15,4 +15,4 @@
     become: true
     tasks:
       - name: verify mysql status
-        commnand: service mysql status
+        command: service mysql status
