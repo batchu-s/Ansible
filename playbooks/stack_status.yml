@@ -1,0 +1,18 @@
+---
+  - hosts: webserver
+    become: true
+    tasks:
+      - name: verify apache2 status
+        command: service apache2 status
+
+  - hosts: loadbalancer
+    become: true
+    tasks:
+      - name: verify nginx status
+        command: service nginx status
+
+  - hosts: dbserver
+    become: true
+    tasks:
+      - name: verify mysql status
+        commnand: service mysql status
