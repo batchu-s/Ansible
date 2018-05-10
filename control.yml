@@ -10,4 +10,4 @@
         with_items:
           - curl
           - tree
-
+          - python-httplib2
