@@ -30,7 +30,7 @@
     tasks:
       - name: restarting mysql-server
         service:
-          name: mysqld
+          name: mysql
           state: restarted
 
       - wait_for:
