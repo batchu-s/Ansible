@@ -8,6 +8,10 @@
           name: nginx
           state: stopped
 
+      - wait_for:
+          port: 80
+          state: drained
+
   - hosts: webserver
     become: true
     tasks:
@@ -16,14 +20,22 @@
           name: httpd
           state: stopped
 
+      - wait_for:
+          port: 80
+          state: stopped
+
   # Restarting Database server
   - hosts: dbserver
     become: true
     tasks:
       - name: restarting mysql-server
-        service: 
+        service:
           name: mysqld
           state: restarted
+
+      - wait_for:
+          port: 3306
+          state: started
 
   # Bringing stack up
   - hosts: webserver
@@ -34,6 +46,9 @@
           name: httpd
           state: started
 
+      - wait_for:
+          port: 80
+
   - hosts: loadbalancer
     become: true
     tasks:
@@ -42,3 +57,5 @@
           name: nginx
           state: started
 
+      - wait_for:
+          port: 80
