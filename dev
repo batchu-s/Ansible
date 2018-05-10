@@ -1,12 +1,12 @@
 #This is inventory file
 [loadbalancer]
-lb01 ansible_connection=ssh ansible_ssh_pass=sumanth
+lb01 ansible_connection=ssh
 
 [webserver]
-svr01 ansible_connection=ssh ansible_ssh_pass=sumanth
+svr01 ansible_connection=ssh
 
 [control]
 localhost ansible_connection=local
 
 [dbserver]
-db01 ansible_connection=ssh ansible_ssh_pass=sumanth
+db01 ansible_connection=ssh
