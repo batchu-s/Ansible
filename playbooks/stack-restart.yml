@@ -34,6 +34,7 @@
           state: restarted
 
       - wait_for:
+          host: '{{ ansible_eth0.ipv4.address }}'
           port: 3306
           state: started
 

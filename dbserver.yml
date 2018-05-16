@@ -2,5 +2,4 @@
   - hosts: dbserver
     become: true
     roles:
-      - mysql
-      
+      - { role: mysql, db_name: demo, db_user_name: demo, db_user_pass: demo, db_host: '%' }
