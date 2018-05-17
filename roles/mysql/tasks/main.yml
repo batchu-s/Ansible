@@ -31,5 +31,5 @@
     name: '{{ db_user_name }}'
     password: '{{ db_user_pass }}'
     state: present
-    priv: {{ db_name}}.*:ALL
+    priv: '{{ db_name}}.*:ALL'
     host: '{{ db_host }}'
