@@ -15,10 +15,16 @@
   with_dict: sites
   notify: restart nginx
 
+- name: get all active sites
+  shell: ls -1 /etc/ansible/sites-enabled
+  register: active
+
 - name: de-activate default nginx site
   file:
-    path: /etc/nginx/sites-enabled/default
+    path: /etc/nginx/sites-enabled/{{ item }}
     state: absent
+  with_items: active.stdout_lines
+  when: item not in sites
   notify: restart nginx
 
 - name: activate demo site
