@@ -16,7 +16,7 @@
   notify: restart nginx
 
 - name: get all active sites
-  shell: ls -1 /etc/ansible/sites-enabled
+  shell: ls -1 /etc/nginx/sites-enabled
   register: active
 
 - name: de-activate default nginx site
