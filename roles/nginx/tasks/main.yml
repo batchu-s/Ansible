@@ -27,11 +27,12 @@
   when: item not in sites
   notify: restart nginx
 
-- name: activate demo site
+- name: activate all sites
   file:
     src: /etc/nginx/sites-available/{{ item.key }}
-    dest: /etc/nginx/sites-enabled/default
+    dest: /etc/nginx/sites-enabled/{{ item.key }}
     state: link
+  with_dict: "{{ sites }}"
   notify: restart nginx
 
 - name: ensure nginx started
